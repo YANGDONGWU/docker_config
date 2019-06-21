@@ -1,0 +1,39 @@
+version: '2'  
+services:
+  db: 
+    image: mysql
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+    restart: always
+
+  redis:
+    image: redis:3.2
+    container_name: redis
+    ports: 
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    restart: always
+
+  rabbitmq: 
+    image: rabbitmq
+    container_name: myrabbit
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "25672:25672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
+    restart: always
+  
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    environment:  
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
